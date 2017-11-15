@@ -12,6 +12,7 @@ corr <- function(directory, threshold = 0){
                   data <- c(data, cn)
             } 
       }
+      
       return(data)            
 }
 

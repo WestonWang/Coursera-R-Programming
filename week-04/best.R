@@ -1,13 +1,21 @@
 best <- function (state, outcome){
+      ## Read outcome data
+      ## Check that state and outcome are valid
+      ## Return hospital name in that state with lowest 30-day death
+      ## rate
+      
       temp <- read.csv("outcome-of-care-measures.csv")[c(2,7,11,17,23)]
       colnames(temp) <- c('name','state','heart attack','heart failure','pneumonia')
       
       if (!state %in% temp$state ) {stop('Invalid State')}
       if (!outcome %in% names(temp)) {stop('Invalid Outcome')}
 
-      t1 <- temp[temp$state == state, ][c('name','state',outcome)] 
+      t1 <- temp[temp$state == state, ][c('name', 'state', outcome)] 
+      
       t1[[outcome]] <- suppressWarnings(as.numeric(as.character(t1[[outcome]])))
+      
       t1 <- t1[complete.cases(t1), ]
+      
       t2 <- t1[t1[[outcome]] == min(t1[[outcome]]), ]
       
       t2 <- t2[order(t2[[1]]), ]

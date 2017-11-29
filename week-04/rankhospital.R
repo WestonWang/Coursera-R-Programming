@@ -3,8 +3,8 @@ rankhospital <- function (state, outcome, num = 'best'){
       temp <- read.csv('outcome-of-care-measures.csv', colClasses = 'character')[, c(2,7,11,17,23)]
       colnames(temp) <- c('name', 'state','heart attack', 'heart failure', 'pneumonia')
       
-      if (!state %in% dd$state) {stop ("Invalid state")}
-      if (!outcome %in% names(dd)) {stop ("Invalid outcome")}
+      if (!state %in% temp$state) {stop ("Invalid state")}
+      if (!outcome %in% names(temp)) {stop ("Invalid outcome")}
       
       t1 <- temp[temp$state == state, c('name', outcome)]
       t1[[outcome]] <- as.numeric(t1[[outcome]])
